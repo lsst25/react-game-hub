@@ -6,7 +6,7 @@ import getCroppedImgUrl from "../services/image-url";
 
 const GameCard = ({ game }: { game: Game }) => {
     return (
-        <Card borderRadius={10} overflow="hidden">
+        <Card width="300px" borderRadius={10} overflow="hidden">
             <Image src={getCroppedImgUrl(game.background_image)} alt={game.name} />
             <CardBody>
                 <Heading fontSize="2xl">
