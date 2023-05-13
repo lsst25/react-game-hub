@@ -1,4 +1,6 @@
 import useData from "./useData";
+import {Genre} from "./useGenres";
+import {AxiosRequestConfig} from "axios";
 
 export interface Platform {
     id: number;
@@ -14,8 +16,14 @@ export interface Game {
     metacritic: number;
 }
 
-const useGames = () => {
-    const { data, error, isLoading } = useData<Game>('/games');
+const useGames = (selectedGenre: Genre | null) => {
+    const requestConfig: AxiosRequestConfig = {
+        params: {
+            genres: selectedGenre?.id
+        }
+    };
+    const { data, error, isLoading } = useData<Game>('/games', requestConfig, [selectedGenre?.id]);
+
     return { games: data, error, isLoading };
 };
 
