@@ -1,7 +1,7 @@
 import useData from "./useData";
-import {Genre} from "./useGenres";
 import {AxiosRequestConfig} from "axios";
 import {Platform} from "./usePlatforms";
+import {GameQuery} from "../App";
 
 export interface Game {
     id: number;
@@ -11,14 +11,14 @@ export interface Game {
     metacritic: number;
 }
 
-const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null) => {
+const useGames = (gameQuery: GameQuery) => {
     const requestConfig: AxiosRequestConfig = {
         params: {
-            genres: selectedGenre?.id,
-            parent_platforms: selectedPlatform?.id
+            genres: gameQuery.genre?.id,
+            parent_platforms: gameQuery.platform?.id,
         }
     };
-    const { data, error, isLoading } = useData<Game>('/games', requestConfig, [selectedGenre?.id, selectedPlatform?.id]);
+    const { data, error, isLoading } = useData<Game>('/games', requestConfig, [gameQuery]);
 
     return { games: data, error, isLoading };
 };
