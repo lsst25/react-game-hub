@@ -26,7 +26,7 @@ const useGames = (gameQuery: GameQuery) => {
                 page: pageParam,
             }
         }),
-        staleTime: 1000 * 60, // One minute
+        staleTime: 1000 * 60 * 60, // 1 hour
         getNextPageParam: (lastPage, allPages) => {
             return lastPage.next ? allPages.length + 1 : undefined;
         }
