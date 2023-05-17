@@ -1,7 +1,8 @@
-import useData from "./useData";
 import {AxiosRequestConfig} from "axios";
 import {Platform} from "./usePlatforms";
 import {GameQuery} from "../App";
+import {useQuery} from "@tanstack/react-query";
+import apiClient, {FetchResponse} from "../services/api-client";
 
 export interface Game {
     id: number;
@@ -21,7 +22,14 @@ const useGames = (gameQuery: GameQuery) => {
             search: gameQuery.search,
         }
     };
-    const { data, error, isLoading } = useData<Game>('/games', requestConfig, [gameQuery]);
+    const { data, error, isLoading } = useQuery<FetchResponse<Game>, Error>({
+        queryKey: ['games', gameQuery],
+        queryFn: () =>
+            apiClient
+                .get<FetchResponse<Game>>('/games', requestConfig)
+                .then(response => response.data),
+        staleTime: 1000 * 60, // One minute
+    });
 
     return { games: data, error, isLoading };
 };
