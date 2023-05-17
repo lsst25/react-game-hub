@@ -3,11 +3,11 @@ import {Button, Heading, HStack, Image, List, ListItem, Spinner} from "@chakra-u
 import getCroppedImgUrl from "../services/image-url";
 
 interface Props {
-    selectedGenre: Genre | null;
-    onSelectGenre: (genre: Genre) => void;
+    selectedGenreId?: number;
+    onSelectGenre: (genre: number) => void;
 }
 
-const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
+const GenreList = ({ selectedGenreId, onSelectGenre }: Props) => {
     const { genres, isLoading, error } = useGenres();
 
     if (error) return null;
@@ -31,9 +31,9 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
                                 fontSize="lg"
                                 whiteSpace="normal"
                                 textAlign="left"
-                                fontWeight={isSelected(selectedGenre, genre) ? "bold" : "normal"}
-                                colorScheme={isSelected(selectedGenre, genre) ? "blue" : ""}
-                                onClick={() => onSelectGenre(genre)}>
+                                fontWeight={isSelected(selectedGenreId, genre) ? "bold" : "normal"}
+                                colorScheme={isSelected(selectedGenreId, genre) ? "blue" : ""}
+                                onClick={() => onSelectGenre(genre.id)}>
                                 {genre.name}
                             </Button>
                         </HStack>
@@ -44,8 +44,8 @@ const GenreList = ({ selectedGenre, onSelectGenre }: Props) => {
     );
 }
 
-function isSelected(selectedGenre: Genre | null, genre: Genre) {
-    return  selectedGenre?.id === genre.id;
+function isSelected(selectedGenreId: number | undefined, genre: Genre) {
+    return  selectedGenreId === genre.id;
 }
 
 export default GenreList;
