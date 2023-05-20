@@ -19,13 +19,13 @@ const HomePage = () => {
     return (
         <Grid templateAreas={layouts} templateColumns={columns}>
             <Show above="lg">
-                <GridItem gridArea="aside" paddingX={5}>
+                <GridItem gridArea="aside">
                     <GenreList/>
                 </GridItem>
             </Show>
-            <GridItem gridArea="main" padding={3}>
+            <GridItem gridArea="main">
                 <GameHeading/>
-                <Flex gap={2} marginBottom={3}>
+                <Flex gap={2} marginBottom={3} paddingLeft={3}>
                     <PlatformSelector/>
                     <SortSelector/>
                 </Flex>

@@ -13,7 +13,7 @@ const GenreList = () => {
 
     return (
         <>
-            <Heading as="h2">Genres</Heading>
+            <Heading as="h2" marginBottom={5}>Genres</Heading>
             <List>
                 {genres?.results.map((genre) => (
                     <ListItem key={genre.id} paddingY="5px">
