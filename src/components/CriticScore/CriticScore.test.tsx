@@ -1,8 +1,8 @@
-import { render, screen } from '../utils/test-utils'
+import { render, screen } from '../../utils/test-utils'
 import CriticScore from "./CriticScore";
 
-describe('Input', async () => {
-    it('should render the input', () => {
+describe('Critic Score', async () => {
+    it('should render the appropriate score from the props', () => {
         const score = 90;
         render(
             <CriticScore score={score}/>,
