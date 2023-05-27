@@ -3,7 +3,7 @@ import {debounce} from "lodash";
 
 type Callback = () => void;
 
-const useDebounce = (callback: Callback) => {
+const useDebounce = (callback: Callback, wait: number = 300) => {
     const ref = useRef<Callback>();
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const useDebounce = (callback: Callback) => {
             ref.current?.();
         };
 
-        return debounce(func, 1000);
+        return debounce(func, wait);
     }, []);
 };
 
